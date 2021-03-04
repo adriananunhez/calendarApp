@@ -10,7 +10,7 @@ export const startLogin = ( email, password ) => {
 
         const resp = await fetchSinToken( 'auth', { email, password }, 'POST');
         const body = await resp.json();
-
+        
         if( body.ok ){
             localStorage.setItem('token', body.token );
             localStorage.setItem('token-init-date', new Date().getTime() );
@@ -20,7 +20,7 @@ export const startLogin = ( email, password ) => {
                 name: body.name
             }) );
         }else{
-            Swal.fire('Error', body.message, 'error')
+            Swal.fire('Error', body.msg, 'error')
         }
     }
 
@@ -40,7 +40,7 @@ export const startRegister = ( email, password, name ) => {
                 name: body.name
             }) );
         }else{
-            Swal.fire('Error', body.message, 'error')
+            Swal.fire('Error', body.msg, 'error')
         }
 
     }
@@ -73,7 +73,7 @@ const checkingFinish = () => ({
     type: types.authCheckingFinish
 })
 
-const login = ( user ) => ({
+export const login = ( user ) => ({
     type: types.authLogin,
     payload: user
 });
